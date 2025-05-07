@@ -1,10 +1,12 @@
 import { Jost } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { AppContextProvider } from "@/context/AppContext";
 
 const font = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
-  weight:["100","200","300","400" , "500", "600", "700" , "800", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
@@ -14,12 +16,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${font.className} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+
+      <AppContextProvider>
+
+        <html lang="en">
+          <body
+            className={`${font.className} antialiased`}
+          >
+            {children}
+          </body>
+        </html>
+      </AppContextProvider>
+
+    </ClerkProvider>
   );
 }
