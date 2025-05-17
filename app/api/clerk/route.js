@@ -15,6 +15,10 @@ export async function POST(req) {
 
     const svixHeaders = {
         "svix-id": headerPayload.get("svix-id"),
+        
+        "svix-timestamp": headerPayload.get("svix-timestamp"),
+
+
         "svix-signature": headerPayload.get("svix-signature"),
 
 
@@ -54,7 +58,7 @@ export async function POST(req) {
             break;
 
         case 'user.updated':
-            await User.findByIdAndUpdate(data.id,userData);
+            await User.findByIdAndUpdate(data.id, userData);
             break;
 
         case 'user.deleted':
@@ -62,10 +66,10 @@ export async function POST(req) {
             break;
 
 
-            default:
-                break;
+        default:
+            break;
 
     }
 
-    return NextResponse.json({message:"Event received"})
+    return NextResponse.json({ message: "Event received" })
 }
